@@ -419,7 +419,7 @@ export default function Form() {
                   placeholder="e.g. Zara, Zudio, StyleBloom..."
                   value={form.app_name_suggestion}
                   onChange={handleChange}
-                  className={inputCls}
+                  className={inputCls + ' border-pink-300 focus:border-pink-500 focus:ring-pink-200'}
                 />
               </div>
 
