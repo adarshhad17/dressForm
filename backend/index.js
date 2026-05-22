@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Allow comma-separated origins in FRONTEND_URL
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173,https://dressform-production.up.railway.app')
   .split(',')
   .map((o) => o.trim());
 
