@@ -28,8 +28,6 @@ export default function Form() {
     pattern_type: [], material: [],
   });
   const [optionsLoading, setOptionsLoading] = useState(true);
-  const [customDressType, setCustomDressType] = useState('');
-  const [showCustomDressInput, setShowCustomDressInput] = useState(false);
 
   useEffect(() => {
     axios.get(OPTIONS_API)
@@ -288,43 +286,6 @@ export default function Form() {
                       </span>
                     ))
                   }
-                  {/* Add Type + button / inline input */}
-                  {!optionsLoading && (
-                    showCustomDressInput ? (
-                      <form
-                        className="flex items-center gap-1.5"
-                        onSubmit={e => {
-                          e.preventDefault();
-                          const val = customDressType.trim();
-                          if (val && !form.dress_type.includes(val) && form.dress_type.length < 5) {
-                            setForm(prev => ({ ...prev, dress_type: [...prev.dress_type, val] }));
-                          }
-                          setCustomDressType('');
-                          setShowCustomDressInput(false);
-                        }}
-                      >
-                        <input
-                          autoFocus
-                          type="text"
-                          value={customDressType}
-                          onChange={e => setCustomDressType(e.target.value)}
-                          placeholder="Type & press Enter"
-                          maxLength={40}
-                          className="px-3 py-2 text-sm border border-violet-300 rounded-full outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 w-40"
-                        />
-                        <button type="submit" className="px-3 py-2 text-sm font-semibold text-white bg-violet-500 rounded-full hover:bg-violet-600 transition">Add</button>
-                        <button type="button" onClick={() => { setShowCustomDressInput(false); setCustomDressType(''); }}
-                          className="px-3 py-2 text-sm text-gray-400 border border-gray-200 rounded-full hover:border-gray-400 transition">Cancel</button>
-                      </form>
-                    ) : (
-                      form.dress_type.length < 5 && (
-                        <button type="button" onClick={() => setShowCustomDressInput(true)}
-                          className="px-4 py-2.5 min-h-[44px] rounded-full border border-dashed border-violet-300 text-violet-500 text-sm font-medium hover:border-violet-500 hover:bg-violet-50 transition">
-                          + Add Type
-                        </button>
-                      )
-                    )
-                  )}
                 </div>
               </div>
 
