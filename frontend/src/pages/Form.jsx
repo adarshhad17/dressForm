@@ -193,12 +193,16 @@ export default function Form() {
               {/* Phone */}
               <div className="flex flex-col gap-2">
                 <label className={labelCls}>Phone</label>
-                <input id="phone" className={inputCls} type="tel" name="phone"
-                  placeholder="e.g. +91 98765 43210" value={form.phone} maxLength={10}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/\D/g, '');
-                    setForm((prev) => ({ ...prev, phone: val }));
-                  }} />
+                <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden focus-within:border-pink-400 focus-within:ring-2 focus-within:ring-pink-100 bg-white transition">
+                  <span className="px-3 py-3 text-sm font-semibold text-gray-500 bg-gray-50 border-r border-gray-200 select-none whitespace-nowrap">+91</span>
+                  <input id="phone" type="tel" name="phone"
+                    placeholder="98765 43210" value={form.phone} maxLength={10}
+                    className="flex-1 px-3 py-3 text-sm text-gray-900 font-outfit outline-none bg-white placeholder:text-gray-400"
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, '');
+                      setForm((prev) => ({ ...prev, phone: val }));
+                    }} />
+                </div>
               </div>
 
               {/* Age */}
