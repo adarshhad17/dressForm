@@ -439,13 +439,13 @@ export default function Form() {
         </div>
 
         {/* Admin link */}
-        <div className="mt-6 text-center">
+        {/* <div className="mt-6 text-center">
           <Link to="/login"
             className="inline-flex items-center gap-1.5 px-5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 text-sm font-semibold hover:border-gray-400 transition">
             ⚙️ Admin Panel
           </Link>
         </div>
-      </div>
+      </div> */}
 
       {/* Toast */}
       {toast && (
