@@ -99,27 +99,27 @@ export default function Form() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-white font-outfit flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
+      <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-white font-outfit sm:px-6 sm:py-16">
         <div className="w-full max-w-md bg-white border border-pink-100 rounded-2xl shadow-[0_8px_32px_rgba(236,72,153,0.12)] p-6 sm:p-10 text-center">
-          <div className="flex justify-center gap-2 text-4xl mb-4">
+          <div className="flex justify-center gap-2 mb-4 text-4xl">
             <span>🌸</span><span>🎉</span><span>✨</span>
           </div>
-          <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500 mb-2">
+          <h2 className="mb-2 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">
             Thank You!
           </h2>
-          <p className="text-gray-500 text-sm mb-6">
+          <p className="mb-6 text-sm text-gray-500">
             Your style preferences have been recorded successfully.
           </p>
-          <div className="bg-gradient-to-br from-violet-50 to-pink-50 border border-pink-100 rounded-2xl px-6 py-5 mb-6 text-left space-y-2">
-            <p className="text-pink-600 font-semibold text-sm">💐 Wishing you a stylish &amp; beautiful journey ahead!</p>
-            <p className="text-violet-600 font-semibold text-sm">✨ May every outfit you wear make you feel confident &amp; radiant.</p>
-            <p className="text-emerald-600 font-semibold text-sm">🎁 Stay tuned — you might just be our lucky winner!</p>
+          <div className="px-6 py-5 mb-6 space-y-2 text-left border border-pink-100 bg-gradient-to-br from-violet-50 to-pink-50 rounded-2xl">
+            <p className="text-sm font-semibold text-pink-600">💐 Wishing you a stylish &amp; beautiful journey ahead!</p>
+            <p className="text-sm font-semibold text-violet-600">✨ May every outfit you wear make you feel confident &amp; radiant.</p>
+            <p className="text-sm font-semibold text-emerald-600">🎁 Stay tuned — you might just be our lucky winner!</p>
           </div>
-          <p className="text-gray-400 text-xs mb-6">
+          <p className="mb-6 text-xs text-gray-400">
             We'll reach out to you on WhatsApp with updates &amp; surprises.
           </p>
           <button
-            className="px-7 py-3 bg-gradient-to-r from-pink-500 to-violet-500 text-white font-semibold text-sm rounded-xl shadow hover:opacity-90 transition"
+            className="py-3 text-sm font-semibold text-white transition shadow px-7 bg-gradient-to-r from-pink-500 to-violet-500 rounded-xl hover:opacity-90"
             onClick={() => { setForm(initialForm); setSubmitted(false); }}
           >
             Submit Another Response
@@ -134,13 +134,13 @@ export default function Form() {
 
       {/* Hero Banner Image — Full Screen Width */}
       <div className="relative w-full overflow-hidden mb-6 sm:mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.15)]" style={{height: '220px'}}>
-          <img src={heroBg} alt="Women's Fashion" className="w-full h-full object-cover object-top" />
+          <img src={heroBg} alt="Women's Fashion" className="object-cover object-top w-full h-full" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 pb-6">
+          <div className="absolute inset-0 flex flex-col items-center justify-end px-4 pb-6 text-center">
             {/* <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/30 text-white px-4 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
               ✨ Style Selection Form
             </div> */}
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-pink-200 to-white drop-shadow-lg leading-tight">
+            <h2 className="text-3xl font-extrabold leading-tight text-transparent sm:text-5xl bg-clip-text bg-gradient-to-r from-white via-pink-200 to-white drop-shadow-lg">
               Tell Us Your <br className="hidden sm:block" />
               <span className="italic font-light">Style</span>
             </h2>
@@ -148,16 +148,16 @@ export default function Form() {
         </div>
 
       {/* Content — constrained width */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-12">
+      <div className="max-w-3xl px-4 pb-12 mx-auto sm:px-6">
 
         {/* Hero Text */}
-        <header className="text-center mb-6 sm:mb-10">
-          <p className="text-gray-500 text-sm sm:text-base max-w-md mx-auto mb-4 sm:mb-5">
+        <header className="mb-6 text-center sm:mb-10">
+          <p className="max-w-md mx-auto mb-4 text-sm text-gray-500 sm:text-base sm:mb-5">
             Share your style preferences and we'll curate the perfect collection for you.
           </p>
           {/* Gift Winner Banner */}
-          <div className="flex items-center gap-3 bg-gradient-to-r from-violet-50 to-pink-50 border border-violet-200 rounded-2xl px-4 sm:px-6 py-3">
-            <span className="text-2xl flex-shrink-0">🎁</span>
+          <div className="flex items-center gap-3 px-4 py-3 border bg-gradient-to-r from-violet-50 to-pink-50 border-violet-200 rounded-2xl sm:px-6">
+            <span className="flex-shrink-0 text-2xl">🎁</span>
             <div className="text-left">
               <div className="text-xs font-bold uppercase tracking-wider text-green-600 mb-0.5">Lucky Winner Offer</div>
               <div className="text-sm font-semibold text-gray-700">Fill the form &amp; get a chance to win an <span className="text-pink-600">exciting gift!</span></div>
@@ -168,7 +168,7 @@ export default function Form() {
         {/* Card */}
         <div className="bg-white border border-gray-200 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-4 sm:p-8">
           <form onSubmit={handleSubmit} noValidate>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
 
               {/* Name */}
               <div className="flex flex-col gap-2">
@@ -195,22 +195,30 @@ export default function Form() {
               <div className="flex flex-col gap-2">
                 <label className={labelCls}>Phone</label>
                 <input id="phone" className={inputCls} type="tel" name="phone"
-                  placeholder="e.g. +91 98765 43210" value={form.phone} onChange={handleChange} />
+                  placeholder="e.g. +91 98765 43210" value={form.phone} maxLength={10}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    setForm((prev) => ({ ...prev, phone: val }));
+                  }} />
               </div>
 
               {/* Age */}
               <div className="flex flex-col gap-2">
                 <label className={labelCls}>Age</label>
                 <input id="age" className={inputCls} type="number" name="age"
-                  placeholder="e.g. 25" min="10" max="100" value={form.age} onChange={handleChange} />
+                  placeholder="e.g. 25" min="1" max="99" value={form.age}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '').slice(0, 2);
+                    setForm((prev) => ({ ...prev, age: val }));
+                  }} />
               </div>
 
               {/* Category (Wear Occasion) */}
               <div className="flex flex-col gap-2 col-span-full">
-                <label className={labelCls}>Category <span className="text-gray-400 font-normal normal-case tracking-normal">(choose up to 2)</span></label>
+                <label className={labelCls}>Category <span className="font-normal tracking-normal text-gray-400 normal-case">(choose up to 2)</span></label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3,4].map(i => <div key={i} className="h-9 w-24 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3,4].map(i => <div key={i} className="w-24 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.wear_category || []).map(({ id, value }) => {
                         const selected = form.wear_category.includes(value);
                         const maxed = !selected && form.wear_category.length >= 2;
@@ -229,10 +237,10 @@ export default function Form() {
 
               {/* Material */}
               <div className="flex flex-col gap-2 col-span-full">
-                <label className={labelCls}>Material <span className="text-gray-400 font-normal normal-case tracking-normal">(choose up to 5)</span></label>
+                <label className={labelCls}>Material <span className="font-normal tracking-normal text-gray-400 normal-case">(choose up to 5)</span></label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3].map(i => <div key={i} className="h-9 w-20 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3].map(i => <div key={i} className="w-20 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.material || []).map(({ id, value }) => {
                         const selected = form.material.includes(value);
                         const maxed = !selected && form.material.length >= 5;
@@ -251,10 +259,10 @@ export default function Form() {
 
               {/* Dress Type */}
               <div className="flex flex-col gap-2 col-span-full">
-                <label className={labelCls}>Dress Type <span className="text-gray-400 font-normal normal-case tracking-normal">(choose up to 5)</span></label>
+                <label className={labelCls}>Dress Type <span className="font-normal tracking-normal text-gray-400 normal-case">(choose up to 5)</span></label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3,4].map(i => <div key={i} className="h-9 w-20 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3,4].map(i => <div key={i} className="w-20 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.dress_type || []).map(({ id, value }) => {
                         const selected = form.dress_type.includes(value);
                         const maxed = !selected && form.dress_type.length >= 5;
@@ -273,10 +281,10 @@ export default function Form() {
 
               {/* Pattern Type */}
               <div className="flex flex-col gap-2 col-span-full">
-                <label className={labelCls}>Pattern Type <span className="text-gray-400 font-normal normal-case tracking-normal">(choose up to 5)</span></label>
+                <label className={labelCls}>Pattern Type <span className="font-normal tracking-normal text-gray-400 normal-case">(choose up to 5)</span></label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3].map(i => <div key={i} className="h-9 w-20 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3].map(i => <div key={i} className="w-20 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.pattern_type || []).map(({ id, value }) => {
                         const selected = form.pattern_type.includes(value);
                         const maxed = !selected && form.pattern_type.length >= 5;
@@ -298,7 +306,7 @@ export default function Form() {
                 <label className={labelCls}>Dress Size</label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3,4].map(i => <div key={i} className="h-9 w-12 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3,4].map(i => <div key={i} className="w-12 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.dress_size || []).map(({ id, value }) => {
                         const selected = form.dress_size === value;
                         return (
@@ -316,10 +324,10 @@ export default function Form() {
 
               {/* Preferred Styles */}
               <div className="flex flex-col gap-2 col-span-full">
-                <label className={labelCls}>Preferred Style <span className="text-gray-400 font-normal normal-case tracking-normal">(choose up to 3)</span></label>
+                <label className={labelCls}>Preferred Style <span className="font-normal tracking-normal text-gray-400 normal-case">(choose up to 3)</span></label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3].map(i => <div key={i} className="h-9 w-20 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3].map(i => <div key={i} className="w-20 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.style || []).map(({ id, value }) => {
                         const checked = form.preferred_styles.includes(value);
                         const maxed = !checked && form.preferred_styles.length >= 3;
@@ -338,10 +346,10 @@ export default function Form() {
 
               {/* Favorite Colors */}
               <div className="flex flex-col gap-2 col-span-full">
-                <label className={labelCls}>Favorite Colors <span className="text-gray-400 font-normal normal-case tracking-normal">(choose up to 5)</span></label>
+                <label className={labelCls}>Favorite Colors <span className="font-normal tracking-normal text-gray-400 normal-case">(choose up to 5)</span></label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3,4].map(i => <div key={i} className="h-9 w-16 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3,4].map(i => <div key={i} className="w-16 bg-gray-100 rounded-full h-9 animate-pulse" />)
                     : (options.color || []).map(({ id, value }) => {
                         const selected = (form.favorite_colors || '').split(', ').filter(Boolean).includes(value);
                         const maxed = !selected && (form.favorite_colors || '').split(', ').filter(Boolean).length >= 5;
@@ -363,7 +371,7 @@ export default function Form() {
                 <label className={labelCls}>Budget Range</label>
                 <div className="flex flex-wrap gap-2.5">
                   {optionsLoading
-                    ? [1,2,3].map(i => <div key={i} className="h-9 w-28 bg-gray-100 rounded-full animate-pulse" />)
+                    ? [1,2,3].map(i => <div key={i} className="bg-gray-100 rounded-full h-9 w-28 animate-pulse" />)
                     : (options.budget || []).map(({ id, value }) => {
                         const selected = form.budget_range === value;
                         return (
@@ -379,33 +387,29 @@ export default function Form() {
                 </div>
               </div>
 
-              {/* 🎁 Winner Gift Banner */}
-              <div className="col-span-full bg-green-50 border border-green-500 rounded-2xl p-4 sm:p-5 flex gap-3 sm:gap-4 items-start">
-                <span className="text-3xl mt-0.5">🎁</span>
-                <div>
-                  <div className="text-sm font-bold text-pink-400 uppercase tracking-wider mb-1">Lucky Winner Reward</div>
-                  <p className="text-gray-600 text-sm font-medium">
-                    One lucky winner from all submissions will receive an <span className="text-pink-400 font-bold">exciting gift &amp; special offer</span> — just for sharing your style! 🌸
-                  </p>
-                  <p className="text-gray-400 text-xs mt-1.5">Winners will be announced and notified via whatsapp.</p>
-                </div>
-              </div>
-
               {/* App Name Suggestion */}
-              <div className="col-span-full flex flex-col gap-2">
+              <div className="flex flex-col gap-2 col-span-full">
+                <div className="flex items-start gap-3 px-4 py-4 border border-green-200 bg-gradient-to-r from-green-50 to-amber-50 rounded-2xl">
+                  <span className="text-2xl mt-0.5">💡</span>
+                  <div>
+                    <div className="text-sm font-bold text-green-700 mb-0.5">Name Our Upcoming Women's Dress App!</div>
+                    <p className="text-xs leading-relaxed text-gray-600">
+                      We're launching a women's dress app — suggest a name and <span className="font-semibold text-pink-600">win an exciting offer &amp; gift!</span> The best name gets a special reward. 🎁
+                    </p>
+                  </div>
+                </div>
                 <label htmlFor="app_name_suggestion" className={labelCls}>
-                  <span className="text-green-600 font-bold">💡 Name Our App!</span>
-                  <span className="text-pink-600 font-normal normal-case tracking-normal ml-1">— best name wins a surprise gift 🎁</span>
+                  <span className="font-bold text-green-600">Your Suggestion</span>
+                  <span className="ml-1 font-normal tracking-normal text-pink-600 normal-case">— Your name could be on our app & a gift on us! 🎁</span>
                 </label>
                 <input
                   id="app_name_suggestion"
                   type="text"
                   name="app_name_suggestion"
-                  placeholder="e.g. zara, zudio..."
+                  placeholder="e.g. Zara, Zudio, StyleBloom..."
                   value={form.app_name_suggestion}
                   onChange={handleChange}
                   className={inputCls}
-                
                 />
               </div>
 
@@ -424,7 +428,7 @@ export default function Form() {
                   id="submit-form-btn"
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 bg-gradient-to-r from-pink-600 to-pink-800 text-white font-bold text-base rounded-xl shadow-[0_4px_20px_rgba(236,72,153,0.4)] hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-pink-600 text-white font-bold text-base rounded-xl shadow-[0_4px_20px_rgba(236,72,153,0.4)] hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Submitting...' : '🌸 Submit Preferences'}
                 </button>
@@ -435,7 +439,7 @@ export default function Form() {
         </div>
 
         {/* Admin link */}
-        <div className="text-center mt-6">
+        <div className="mt-6 text-center">
           <Link to="/login"
             className="inline-flex items-center gap-1.5 px-5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 text-sm font-semibold hover:border-gray-400 transition">
             ⚙️ Admin Panel

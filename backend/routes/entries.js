@@ -84,6 +84,14 @@ router.post('/', async (req, res) => {
   } = req.body;
 
   try {
+    const existing = await pool.query(
+      'SELECT id FROM dress_entries WHERE LOWER(email) = LOWER($1)',
+      [email]
+    );
+    if (existing.rows.length > 0) {
+      return res.status(409).json({ success: false, error: 'This email has already been submitted. Each email can only submit once.' });
+    }
+
     const result = await pool.query(
       `INSERT INTO dress_entries
         (full_name, last_name, email, phone, age, dress_type, dress_size, preferred_styles, favorite_colors, budget_range, wear_category, location, pattern_type, material, app_name_suggestion, notes)
