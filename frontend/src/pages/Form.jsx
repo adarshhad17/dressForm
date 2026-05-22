@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import heroBg from '../assets/women.avif';
 
 const API_BASE = import.meta.env.VITE_API_URL || '';
@@ -444,8 +443,8 @@ export default function Form() {
             className="inline-flex items-center gap-1.5 px-5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 text-sm font-semibold hover:border-gray-400 transition">
             ⚙️ Admin Panel
           </Link>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
 
       {/* Toast */}
       {toast && (
