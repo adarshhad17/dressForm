@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Adarsh\\\\form\" -Recurse -Force)",
+      "Bash(Select-Object -Property FullName, Mode)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(npm run *)",
+      "Bash(node --check index.js)",
+      "Bash(node --check routes/entries.js)",
+      "Bash(node --check routes/options.js)"
+    ]
+  }
+}
