@@ -2,13 +2,34 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
-// Auto-migrate: add columns if missing
-pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS wear_category VARCHAR(100)`).catch(() => {});
-pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS last_name VARCHAR(100)`).catch(() => {});
-pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS location VARCHAR(150)`).catch(() => {});
-pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS pattern_type VARCHAR(100)`).catch(() => {});
-pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS material VARCHAR(100)`).catch(() => {});
-pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS app_name_suggestion VARCHAR(200)`).catch(() => {});
+// Auto-create table and migrate columns on startup
+async function initEntries() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS dress_entries (
+      id SERIAL PRIMARY KEY,
+      full_name VARCHAR(100) NOT NULL,
+      email VARCHAR(150) NOT NULL,
+      phone VARCHAR(20),
+      age INTEGER,
+      dress_type VARCHAR(50),
+      dress_size VARCHAR(10),
+      preferred_styles TEXT[],
+      favorite_colors VARCHAR(200),
+      budget_range VARCHAR(50),
+      notes TEXT,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
+  await pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS wear_category VARCHAR(100)`).catch(() => {});
+  await pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS last_name VARCHAR(100)`).catch(() => {});
+  await pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS location VARCHAR(150)`).catch(() => {});
+  await pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS pattern_type VARCHAR(100)`).catch(() => {});
+  await pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS material VARCHAR(100)`).catch(() => {});
+  await pool.query(`ALTER TABLE dress_entries ADD COLUMN IF NOT EXISTS app_name_suggestion VARCHAR(200)`).catch(() => {});
+  console.log('✅ dress_entries table ready');
+}
+
+initEntries().catch(console.error);
 
 // Helper: count comma-separated or array values from a column
 function countValues(rows, field, isArray = false) {

@@ -268,9 +268,23 @@ export default function Admin() {
 
   const navItems = [
     { id: 'entries',   label: 'Submissions',    icon: '📋' },
+    { id: 'app_names', label: 'App Name Ideas',  icon: '💡' },
     { id: 'options',   label: 'Manage Options', icon: '⚙️' },
     { id: 'analytics', label: 'Demand Insights', icon: '📊' },
   ];
+
+  // App name suggestions derived from entries
+  const appNameEntries = entries.filter(e => e.app_name_suggestion?.trim());
+  const appNameCounts = appNameEntries.reduce((acc, e) => {
+    const name = e.app_name_suggestion.trim();
+    if (!acc[name]) acc[name] = { count: 0, submitters: [] };
+    acc[name].count += 1;
+    acc[name].submitters.push({ name: e.full_name, date: e.created_at });
+    return acc;
+  }, {});
+  const rankedAppNames = Object.entries(appNameCounts)
+    .sort((a, b) => b[1].count - a[1].count)
+    .map(([value, { count, submitters }]) => ({ value, count, submitters }));
 
   // Fetch analytics when tab is opened
   useEffect(() => {
@@ -304,7 +318,9 @@ export default function Admin() {
             onClick={() => { setActiveTab(id); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition
               ${activeTab === id
-                ? id === 'analytics' ? 'bg-violet-50 text-violet-700 font-semibold' : 'bg-pink-50 text-pink-700 font-semibold'
+                ? id === 'analytics' ? 'bg-violet-50 text-violet-700 font-semibold'
+                  : id === 'app_names' ? 'bg-amber-50 text-amber-700 font-semibold'
+                  : 'bg-pink-50 text-pink-700 font-semibold'
                 : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
           >
             <span>{icon}</span>
@@ -313,6 +329,12 @@ export default function Admin() {
               <span className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full
                 ${activeTab === id ? 'bg-pink-200 text-pink-700' : 'bg-gray-100 text-gray-500'}`}>
                 {entries.length}
+              </span>
+            )}
+            {id === 'app_names' && (
+              <span className={`ml-auto text-xs font-bold px-2 py-0.5 rounded-full
+                ${activeTab === id ? 'bg-amber-200 text-amber-700' : 'bg-gray-100 text-gray-500'}`}>
+                {appNameEntries.length}
               </span>
             )}
             {id === 'analytics' && activeTab !== 'analytics' && (
@@ -374,7 +396,10 @@ export default function Admin() {
               </svg>
             </button>
             <h1 className="font-bold text-gray-900">
-              {activeTab === 'entries' ? '📋 Submissions' : activeTab === 'options' ? '⚙️ Manage Options' : '📊 Demand Insights'}
+              {activeTab === 'entries' ? '📋 Submissions'
+                : activeTab === 'app_names' ? '💡 App Name Ideas'
+                : activeTab === 'options' ? '⚙️ Manage Options'
+                : '📊 Demand Insights'}
             </h1>
           </div>
           <button
@@ -528,6 +553,98 @@ export default function Admin() {
                     </tbody>
                   </table>
                 </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── App Name Ideas Tab ── */}
+        {activeTab === 'app_names' && (
+          <div className="px-6 pb-16 flex-1">
+            {appNameEntries.length === 0 ? (
+              <div className="text-center py-24 text-gray-400">
+                <span className="text-5xl block mb-4">💡</span>
+                <p className="text-sm">No app name suggestions yet.</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+
+                {/* Summary stats */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {[
+                    { label: 'Total Suggestions', value: appNameEntries.length, color: 'text-amber-600' },
+                    { label: 'Unique Names',       value: rankedAppNames.length, color: 'text-pink-600' },
+                    { label: 'Top Pick',           value: rankedAppNames[0]?.value || '—', color: 'text-violet-600', small: true },
+                  ].map(({ label, value, color, small }) => (
+                    <div key={label} className="bg-white border border-gray-100 rounded-2xl px-5 py-4 shadow-sm">
+                      <div className="text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">{label}</div>
+                      <div className={`font-extrabold ${color} ${small ? 'text-base leading-snug mt-1' : 'text-3xl'}`}>{value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Ranked list */}
+                <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+                  <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-2.5">
+                    <span className="text-xl">🏆</span>
+                    <h3 className="font-bold text-gray-800 text-sm">Ranked Suggestions</h3>
+                    <span className="ml-auto text-xs text-gray-400 font-medium">{rankedAppNames.length} unique name{rankedAppNames.length !== 1 ? 's' : ''}</span>
+                  </div>
+                  <div className="divide-y divide-gray-50">
+                    {rankedAppNames.map(({ value, count }, i) => {
+                      const pct = Math.round((count / (rankedAppNames[0]?.count || 1)) * 100);
+                      const bar = INSIGHT_COLORS[i % INSIGHT_COLORS.length];
+                      return (
+                        <div key={value} className="px-5 py-3.5 flex items-center gap-3 hover:bg-gray-50 transition-colors">
+                          <span className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 ${bar}`}>{i + 1}</span>
+                          <span className="text-sm text-gray-800 font-semibold flex-1">{value}</span>
+                          <div className="w-32 h-2 bg-gray-100 rounded-full overflow-hidden shrink-0">
+                            <div className={`h-full rounded-full ${bar}`} style={{ width: `${pct}%` }} />
+                          </div>
+                          <span className="text-sm font-bold text-gray-700 w-8 text-right shrink-0">{count}×</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* All individual submissions */}
+                <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+                  <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-2.5">
+                    <span className="text-xl">📝</span>
+                    <h3 className="font-bold text-gray-800 text-sm">All Submissions</h3>
+                    <span className="ml-auto text-xs text-gray-400 font-medium">{appNameEntries.length} total</span>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm border-collapse">
+                      <thead className="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                          {['#', 'Suggested Name', 'Submitted By', 'Date'].map((h) => (
+                            <th key={h} className="px-5 py-3.5 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 whitespace-nowrap">{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-50">
+                        {appNameEntries.map((e, i) => (
+                          <tr key={e.id} className="hover:bg-gray-50/60 transition">
+                            <td className="px-5 py-3.5 text-gray-300 text-xs font-medium">{i + 1}</td>
+                            <td className="px-5 py-3.5">
+                              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-100">
+                                💡 {e.app_name_suggestion}
+                              </span>
+                            </td>
+                            <td className="px-5 py-3.5">
+                              <div className="font-semibold text-gray-800 text-sm">{e.full_name}</div>
+                              <div className="text-gray-400 text-xs">{e.email}</div>
+                            </td>
+                            <td className="px-5 py-3.5 text-gray-400 text-xs whitespace-nowrap">{formatDate(e.created_at)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
